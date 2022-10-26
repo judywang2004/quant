@@ -1,7 +1,8 @@
 import requests
 
-# Must subscribed to get the key to form the header.
-# Link to get the key https://rapidapi.com/alphavantage/api/alpha-vantage/
+# 1: Using alphavantage API to get stock price
+# 2: Requires subscrib to get the key to form the header.
+# 3: Link to get the key https://rapidapi.com/alphavantage/api/alpha-vantage/
 
 url = "https://alpha-vantage.p.rapidapi.com/query"
 
