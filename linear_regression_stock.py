@@ -7,14 +7,19 @@ df = pd.DataReader('TSLA','stooq',start,end)
 df.sort_index(inplace=True,ascending=False)
 print(df)
 
+predict_count = 1
+df['label'] = df['Close'].shift(-predict_count)
 import numpy as np
-X = df.iloc[:,0].to_numpy().reshape(-1,1)
-Y = df.iloc[:,1].to_numpy().reshape(-1,1)
+predict_count =1
+X = df.drop(['label'],axis=1)
+Y = df['label'][:-predict_count]
 
 from sklearn.linear_model import LinearRegression
-linear_regressor = LinearRegression()
-linear_regressor.fit(X,Y)
-Y_pred = linear_regressor.predict(X)
+scale = StandardScaler()
+scale.fit(X)
+X = scale.transform(X)
+X_latest = X[-predict_count:]
+X=X[:-predict_count]
 
 import matplotlib.pyplot as plt
 plt.scatter(X,Y)
